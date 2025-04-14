@@ -1,2 +1,56 @@
-# Ignorar ambiente virtual
+# Ambiente virtual
 .venv/
+
+# Arquivos de Jupyter temporários
+.ipynb_checkpoints/
+
+# Arquivos Python compilados
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Configurações locais do VS Code
+.vscode/
+
+# Dados sensíveis ou locais
+data/
+*.csv
+*.tsv
+*.xls
+*.xlsx
+
+# Resultados salvos
+results/
+*.png
+*.jpg
+*.jpeg
+*.pdf
+
+# Checkpoints de modelos
+*.h5
+*.hdf5
+*.pb
+*.ckpt
+*.tflite
+saved_model/
+
+# Log de execução
+*.log
+
+# Arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos do TensorBoard
+logs/
+
+# Arquivos de ambiente Jupyter Kernel
+*.env
+.env
+.envrc
+
+# Arquivos de cache pip
+pip-wheel-metadata/
+*.egg-info/
+dist/
+build/
