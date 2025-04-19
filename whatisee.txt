@@ -1,0 +1,61 @@
+# Isso mostra média, desvio padrão, min, max, Q1, Q2, Q3, etc. 
+
+import pandas as pd
+
+df = pd.read_csv('seu_dataset.csv')
+df.describe()
+
+# Cada feature terá seu histograma, mostrando a distribuição dos valores.
+
+import matplotlib.pyplot as plt
+
+df.hist(bins=30, figsize=(20, 15))
+plt.tight_layout()
+plt.show()
+
+# Isso permite identificar outliers e comparar variáveis entre classes (benigno/maligno por ex).
+
+import seaborn as sns
+
+# Substitua 'target' pelo nome da sua variável alvo
+for col in df.drop(columns='target'):
+    plt.figure(figsize=(8, 4))
+    sns.boxplot(x='target', y=col, data=df)
+    plt.title(f'Dispersão e outliers da feature {col}')
+    plt.tight_layout()
+    plt.show()
+
+# Avalie visualmente variáveis altamente correlacionadas (corr > 0.9 ou < -0.9 por exemplo).
+
+corr_matrix = df.corr(numeric_only=True)
+
+plt.figure(figsize=(12, 10))
+sns.heatmap(corr_matrix, annot=True, fmt='.2f', cmap='coolwarm')
+plt.title('Matriz de Correlação')
+plt.show()
+
+# Isso é essencial para verificar balanceamento do dataset.
+
+sns.countplot(x='target', data=df)
+plt.title('Distribuição das classes alvo')
+plt.show()
+
+print(df['target'].value_counts(normalize=True))  # porcentagem
+
+#  6. Discussão sobre variáveis redundantes ou fortemente correlacionadas
+Depois de olhar o mapa de calor e os valores de correlação:
+
+#Liste pares de variáveis com correlação |r| > 0.9.
+
+#Argumente que uma delas pode ser removida por carregar a mesma informação.
+
+# Dica: Variance Inflation Factor (VIF) pode ajudar:
+
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+
+X = df.drop(columns='target')
+vif_data = pd.DataFrame()
+vif_data["feature"] = X.columns
+vif_data["VIF"] = [variance_inflation_factor(X.values, i) for i in range(len(X.columns))]
+
+print(vif_data)
